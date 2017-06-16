@@ -25,7 +25,7 @@ router.get( '/', function( req, res ){
   });
 });
 
-router.post( '/peeps', function( req, res ){
+router.post( '/', function( req, res ){
   console.log( 'req.body.name: ' + req.body.name );
   // retrieved the req.body
   // putting it into an object to be saved in the db

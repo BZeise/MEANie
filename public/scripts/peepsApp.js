@@ -15,6 +15,8 @@ myApp.controller('WhereMyPeeps', function($http, PeepsService) {
     console.log('in whereMyPeepsAt');
     PeepsService.getPeeps().then(function() {
       console.log('back in controller:', PeepsService.allMyPeeps);
+      vm.thePeeps = PeepsService.allMyPeeps.data;
+      console.log(vm.thePeeps);
     });
   }; //end whereMyPeepsAt
 }); // end controller
