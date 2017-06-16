@@ -2,6 +2,12 @@ var express = require( 'express' );
 var router = express.Router();
 var bodyParser = require( 'body-parser' );
 var mongoose = require( 'mongoose' );
+
+
+router.use( bodyParser.urlencoded( { extended: true } ) );
+router.use( bodyParser.json() );
+
+
 // 27017 is default mongo port
 mongoose.connect( 'localhost:/27017/meanie' );
 var peepsSchema = new  mongoose.Schema({
@@ -10,8 +16,7 @@ var peepsSchema = new  mongoose.Schema({
 });
 var peepsModel = mongoose.model( 'peepsModel', peepsSchema );
 
-router.use( bodyParser.urlencoded( { extended: true } ) );
-router.use( bodyParser.json() );
+
 
 router.get( '/', function( req, res ){
   // get and send back all the things
@@ -20,15 +25,17 @@ router.get( '/', function( req, res ){
   });
 });
 
-app.post( '/', function( req, res ){
+router.post( '/peeps', function( req, res ){
   console.log( 'req.body.name: ' + req.body.name );
   // retrieved the req.body
   // putting it into an object to be saved in the db
   var recordToAdd={
     name:req.body.name,
     location:req.body.location
-  }
+  };
   // create new record
   var newRecord=peepsModel( recordToAdd );
   newRecord.save();
 });
+
+module.exports = router;
