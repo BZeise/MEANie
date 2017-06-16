@@ -17,4 +17,14 @@ myApp.service('PeepsService', function($http) {
       sv.allMyPeeps = response;
     });
   };
+
+  sv.deletePeep = function(peepId){
+    console.log('in deletePeep, peepid is', peepId);
+    return $http({
+    method: 'DELETE',
+    url: '/peeps/' + peepId
+  }).then(function(response){
+    sv.deletedPeep = response;
+  });
+  };
 });

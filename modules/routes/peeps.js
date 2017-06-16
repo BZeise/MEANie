@@ -38,4 +38,17 @@ router.post( '/', function( req, res ){
   newRecord.save();
 });
 
+
+router.delete('/:id', function(req, res){
+
+
+  var  id = req.params.id;
+
+
+peepsModel.remove({_id: id}).then(function(){
+  res.send(200);
+});
+
+}); //end router.delete
+
 module.exports = router;

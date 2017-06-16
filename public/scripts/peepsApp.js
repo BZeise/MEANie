@@ -8,6 +8,7 @@ myApp.controller('WhereMyPeeps', function($http, PeepsService) {
       location: vm.locationIn
     }; //end peepToAdd
     PeepsService.addPeep(peepToAdd);
+      vm.whereMyPeepsAt();
   }; //end whereMyPeepsAt
 
 
@@ -20,7 +21,12 @@ myApp.controller('WhereMyPeeps', function($http, PeepsService) {
     });
   }; //end whereMyPeepsAt
 
-  vm.deletePeep = function(peep){
-      console.log('peep to delete:', peep);
+  vm.deletePeep = function(index){
+      console.log('peep to delete:', index);
+      PeepsService.deletePeep(index).then(function(){
+        console.log('back in controller', PeepsService.deletedPeep);
+        vm.delete = PeepsService.deletedPeep;
+        vm.whereMyPeepsAt();
+      });
   };
 }); // end controller
